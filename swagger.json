@@ -1,0 +1,270 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Users API with Express - OpenAPI 3.0",
+      "description": "Sample swagger for a simple API. You can use __Markdown__ as well ;)\n\nYou can use links to:\n- [Awesome link](https://www.youtube.com/watch?v=QiHZxivAZJs)",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "apiteam@joseplanes.com"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      },
+      "version": "1.0.11"
+    },
+    "externalDocs": {
+      "description": "Find out more about Users API",
+      "url": "http://swagger.io"
+    },
+    "servers": [
+      {
+        "url": "localhost:3000/api"
+      }
+    ],
+    "tags": [
+      {
+        "name": "User",
+        "description": "Operations about user"
+      }
+    ],
+    "paths": {
+      "/user": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Creates user with given input body",
+          "description": "Creates user with given input body",
+          "operationId": "createUser",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseUser"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          }
+        }
+      },
+      "/user/{id}": {
+        "get": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Get user by id",
+          "description": "",
+          "operationId": "getUserById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "User's id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseUser"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Delete user by id",
+          "description": "",
+          "operationId": "deleteUser",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The id of the user that needs to be deleted",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Document with _Anas_ has been deleted..."
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          }
+        },
+        "patch": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Update user by id",
+          "description": "",
+          "operationId": "upadteUser",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The id of the user that needs to be updated",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Invalid username supplied",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseUpdatedUser"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/users": {
+        "get": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Get all users",
+          "description": "",
+          "operationId": "getUsers",
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ResponseUser"
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "User": {
+          "type": "object",
+          "required": [
+            "name",
+            "age"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Anas",
+              "description": "User's name"
+            },
+            "age": {
+              "type": "integer",
+              "description": "User's age",
+              "example": 25
+            }
+          }
+        },
+        "ResponseUser": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Anas"
+            },
+            "age": {
+              "type": "number",
+              "example": 25
+            },
+            "__id": {
+              "type": "string",
+              "example": "641c91e1e61bebe4a45baee0"
+            },
+            "__v": {
+              "type": "number",
+              "example": 0
+            }
+          }
+        },
+        "ResponseUpdatedUser": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Nuevo nombre"
+            },
+            "age": {
+              "type": "number",
+              "example": 31
+            },
+            "__id": {
+              "type": "string",
+              "example": "641c91d3e61bebe4a45baeda"
+            },
+            "__v": {
+              "type": "number",
+              "example": 0
+            }
+          }
+        }
+      },
+      "requestBodies": {
+        "User": {
+          "description": "User object that needs to be added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
