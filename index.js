@@ -18,8 +18,8 @@ const app = express();
 app.use(cors())
 app.use(express.json());
 
-const routes = require('./routes/api-routes');
-const swaggerRoute=require('./routes/swagger-route')
+const routes = require('./routes/api/api-routes');
+const swaggerRoute=require('./routes/swagger')
 
 app.use('/api', routes)
 app.use('/', swaggerRoute)
@@ -27,3 +27,5 @@ app.use('/', swaggerRoute)
 app.listen(3000, () => {
     console.log(`Server Started at ${3000}`)
 })
+
+module.exports = app;
