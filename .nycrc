@@ -1,0 +1,16 @@
+{
+    "check-coverage": false,
+    "all": false,
+    "exclude": [
+        "node_modules",
+        "coverage",
+        "test"
+    ],
+    "reporter": [
+        "html",
+        "lcov",
+        "text",
+        "text-summary"
+    ],
+    "report-dir": "coverage"
+}

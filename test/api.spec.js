@@ -15,7 +15,7 @@ describe("User paths", function() {
         .get('/api/users')
         .expect(200)
         .expect('Content-Type', /json/)
-        .then((response, done)=>{
+        .then((response)=>{
             const users=response.body
             users.should.be.an('array')
             users.forEach(user => {

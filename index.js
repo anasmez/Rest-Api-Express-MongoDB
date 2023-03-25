@@ -18,8 +18,8 @@ const app = express();
 app.use(cors())
 app.use(express.json());
 
-const routes = require('./routes/api/api-routes');
-const swaggerRoute=require('./routes/swagger')
+const routes = require('./src/routes/api/api-routes');
+const swaggerRoute=require('./src/routes/swagger')
 
 app.use('/api', routes)
 app.use('/', swaggerRoute)
