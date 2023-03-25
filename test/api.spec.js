@@ -26,4 +26,20 @@ describe("User paths", function() {
             });
         })
     })
+    it("Crete user", (done)=>{
+      supertest(app)
+      .post('/api/user')
+      .send({
+        name: 'Carlos',
+        age: '23'
+      })
+      .expect('Content-Type', /json/)
+      .expect(200, done)
+  })
+
+  it("Crete user", (done)=>{
+    supertest(app)
+    .post('/api/user')
+    .expect(400, done)
+  })
 })
