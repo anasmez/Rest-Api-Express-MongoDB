@@ -6,8 +6,8 @@ config:
     ensure: {}
     # fuzzer: {}
   phases:
-    - duration: 1
-      arrivalRate: 10
+    - duration: 10
+      arrivalRate: 1000
   processor: "./processor.js"
   ensure:
     thresholds:
