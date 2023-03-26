@@ -1,0 +1,43 @@
+config:
+  target: "http://localhost:3000"
+  plugins:
+    expect: {}
+    metrics-by-endpoint: {}
+    ensure: {}
+    # fuzzer: {}
+  phases:
+    - duration: 1
+      arrivalRate: 10
+  processor: "./processor.js"
+  ensure:
+    thresholds:
+      # p99 of response time must be <250:
+      - "http.response_time.p99": 250
+      # p95 of response time must be <100:
+      - "http.response_time.p95": 100
+scenarios:
+  - name: "entrar a la especificación de la api"
+    flow:
+      - get:
+          url: "/api-docs"
+          expect:
+            - statusCode: 200
+  - name: "crear usuario"
+    flow:
+      - post:
+          url: "/api/user"
+          beforeRequest: getNameAndAge
+          json:
+            name: "{{ name }}"
+            age: "{{ age }}"
+          capture:
+            - json: "$"
+              as: response
+          expect:
+            - statusCode: 200
+            - contentType: json
+            - hasProperty: "__v"
+            - hasProperty: "_id"
+            - hasProperty: "name"
+            - hasProperty: "age"
+      - log: "response is {{ response }}"

@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "test": "mocha test --timeout 4000 --reporter mochawesome --exit",
-    "coverage": "nyc npm run test"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "mocha:test": "mocha test --timeout 4000 --reporter mochawesome --exit",
+    "nyc:coverage": "nyc npm run mocha:test",
+    "artillery:test": "artillery run ./artillery/artillery.yml",
+    "artillery:fuzz-test": "DEBUG=plugin:fuzzer artillery run ./clonika.yml",
+    "artillery:report": "npx mkdirp artillery/reports && artillery run --output ./artillery/reports/report.json ./artillery/artillery.yml && artillery report --output ./artillery/reports/report.html ./artillery/reports/report.json"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +22,10 @@
     "swagger-ui-express": "^4.6.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "artillery": "^2.0.0-31",
+    "artillery-plugin-fuzzer": "^1.0.1",
+    "artillery-plugin-metrics-by-endpoint": "^1.0.2",
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
     "mochawesome": "^7.1.3",
