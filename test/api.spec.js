@@ -2,6 +2,7 @@ const supertest = require("supertest");
 const assert = require("assert");
 const app = require("../index");
 const should=require('chai').should();
+const {faker}=require('@faker-js/faker')
 
 describe("GET /", function () {
   it("it should has status code 200", function (done) {
@@ -26,18 +27,18 @@ describe("User paths", function() {
             });
         })
     })
-    it("Crete user", (done)=>{
+    it("Create user", (done)=>{
       supertest(app)
       .post('/api/user')
       .send({
-        name: 'Carlos',
-        age: '23'
+        name: faker.name.fullName(),
+        age: faker.random.numeric(2)
       })
       .expect('Content-Type', /json/)
       .expect(200, done)
   })
 
-  it("Crete user", (done)=>{
+  it("Create user", (done)=>{
     supertest(app)
     .post('/api/user')
     .expect(400, done)
