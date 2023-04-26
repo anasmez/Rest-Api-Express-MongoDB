@@ -3,6 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 const mongoString = process.env.DATABASE_URL;
+const router=express.Router();
 
 const winston = require("winston");
 
@@ -60,6 +61,14 @@ const swaggerRoute = require("./src/routes/swagger");
 
 app.use("/api", routes);
 app.use("/", swaggerRoute);
+
+// app.get('/player', async(req, res)=>{
+//   res.sendFile(__dirname+'/bases/index.html')
+// })
+
+// router.get('/dbz', async(req, res)=>{
+//   res.sendFile('./bases/index.html')
+// })
 
 app.listen(3000, () => {
   logger.info("Server started at 3000");

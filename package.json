@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "nodemon -e html,js index.js",
     "mocha:test": "mocha test --timeout 4000 --reporter mochawesome --exit",
     "nyc:coverage": "nyc npm run mocha:test",
     "artillery:test": "artillery run ./artillery/artillery.yml",
